@@ -1,0 +1,18 @@
+service: sss-lambda
+
+provider:
+  name: aws
+  runtime: provided.al2
+  region: eu-west-1 # Put your AWS region
+  architecture: arm64
+
+package:
+  patterns:
+    - '!./**'
+    - ./bootstrap
+
+functions:
+  health:
+    handler: bootstrap # route to binary
+    events:
+      - httpApi: '*'
